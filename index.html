@@ -3,9 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You've been hacked</title>
+    <title>Free Minecraft</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .loading-container {
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .loading-bar {
+            width: 100%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+        .loading-bar-fill {
+            height: 100%;
+            width: 0;
+            background-color: #3498db;
+            border-radius: 15px;
+            transition: width 0.1s ease;
+        }
+        .loading-text {
+            font-size: 18px;
+            color: #333;
+        }
+        .percent-text {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #333;
+        }
+        .gif-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .gif-label {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .random-text, .shape {
+            position: absolute;
+        }
+        @keyframes moveShape {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50vw, 50vh) rotate(180deg); }
+            100% { transform: translate(-50vw, -50vh) rotate(360deg); }
+        }
+        .shape {
+            background-color: white;
+            opacity: 0.8;
+            animation: moveShape linear infinite;
+        }
+    </style>
 </head>
 <body>
-    <img src="game.gif" alt="Playing GIF">
+    <div class="gif-container" id="gifContainer">
+        <div class="gif-label">GIF</div>
+        <img src="aaa.gif" alt="Playing GIF">
+    </div>
+
+    <div class="loading-container">
+        <div class="loading-text">Downloading Viruses and Malware</div>
+        <div class="loading-bar">
+            <div class="loading-bar-fill" id="loadingBarFill"></div>
+            <div class="percent-text" id="percentText">0%</div>
+        </div>
+    </div>
+
+    <script>
+        let progress = 0;
+        const loadingBarFill = document.getElementById('loadingBarFill');
+        const percentText = document.getElementById('percentText');
+        const gifContainer = document.getElementById('gifContainer');
+
+        const interval = setInterval(() => {
+            if (progress < 100) {
+                progress += 1;
+                loadingBarFill.style.width = progress + '%';
+                percentText.textContent = progress + '%';
+            } else {
+                clearInterval(interval);
+                percentText.textContent = '100%';
+                showChaos();
+            }
+        }, 50); // Adjust the interval time for desired loading speed
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createRandomText() {
+            const text = document.createElement('div');
+            text.classList.add('random-text');
+            text.style.top = `${randomInt(0, 100)}vh`;
+            text.style.left = `${randomInt(0, 100)}vw`;
+            text.style.fontSize = `${randomInt(10, 30)}px`;
+            text.style.fontFamily = ['Arial', 'Courier New', 'Georgia', 'Times New Roman', 'Verdana'][randomInt(0, 4)];
+            text.style.color = `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+            text.textContent = String.fromCharCode(randomInt(65, 90)); // Random letter
+            document.body.appendChild(text);
+        }
+
+        function createRandomShape() {
+            const shape = document.createElement('div');
+            shape.classList.add('shape');
+            shape.style.top = `${randomInt(0, 100)}vh`;
+            shape.style.left = `${randomInt(0, 100)}vw`;
+            shape.style.width = `${randomInt(20, 100)}px`;
+            shape.style.height = `${randomInt(20, 100)}px`;
+            shape.style.backgroundColor = `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+            shape.style.borderRadius = randomInt(0, 1) ? '50%' : '0%';
+            shape.style.animationDuration = `${randomInt(1, 1)}s`;
+            shape.style.animationTimingFunction = 'cubic-bezier(' + Math.random() + ', ' + Math.random() + ', ' + Math.random() + ', ' + Math.random() + ')';
+            document.body.appendChild(shape);
+        }
+
+        function showChaos() {
+            for (let i = 0; i < 100; i++) {
+                createRandomText();
+                createRandomShape();
+            }
+        }
+    </script>
 </body>
 </html>
